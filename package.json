@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/zhuzhu930/hw12-MySQL-EmployeeTracker-JD#readme",
   "dependencies": {
-    "inquirer": "^8.2.4"
+    "inquirer": "^8.2.4", 
+    "express": "^4.17.1",
+    "mysql2": "^2.2.5"
   }
 }
