@@ -1,0 +1,24 @@
+{
+  "name": "hw12-mysql-employeetracker-jd",
+  "version": "1.0.0",
+  "description": "A command line app that uses node.js, inquirer and MySQL to manage and track employees",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhuzhu930/hw12-MySQL-EmployeeTracker-JD.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhuzhu930/hw12-MySQL-EmployeeTracker-JD/issues"
+  },
+  "homepage": "https://github.com/zhuzhu930/hw12-MySQL-EmployeeTracker-JD#readme",
+  "dependencies": {
+    "inquirer": "^8.2.4"
+  }
+}
