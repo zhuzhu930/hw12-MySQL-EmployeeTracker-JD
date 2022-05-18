@@ -35,15 +35,14 @@ VALUES (1, "Project Manager", 100000, 001),
 
 
     INSERT INTO employee (id, first_name, last_name, role_id, manager_id)
-    VALUES (1, "William", "Smith", 10, 5),
-           (2, "Rezza", "Fredd", 2, 1),
-           (3, "Mohan", "Kumar", 20, 18),
-           (4, "Cindy", "Mac", 18, 16),
-           (5, "Vince", "Jose", 26, 22),
-           (6, "Rajiv", "Kumar", 22, 21),
-           (7, "John", "Thomas", 7, 5),
-           (8, "Oshane", "Mathew", 11, 15),
-           (9, "Chin", "Young", 19, 17),
-           (10, "Linda", "Greedman", 4, 1),
+    VALUES (1, "William", "Smith", 10, NULL),
+           (2, "Rezza", "Fredd", 2, NULL),
+           (3, "Mohan", "Kumar", 20, NULL),
+           (4, "Cindy", "Mac", 18, 4),
+           (5, "Vince", "Jose", 26, 5),
+           (6, "Rajiv", "Kumar", 22, NULL),
+           (7, "John", "Thomas", 7, NULL),
+           (8, "Oshane", "Mathew", 11, NULL),
+           (9, "Chin", "Young", 19, 9),
+           (10, "Linda", "Greedman", 4, NULL);
 
--- double check the manager_id part.try using inner join.
