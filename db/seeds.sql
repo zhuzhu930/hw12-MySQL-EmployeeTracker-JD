@@ -46,4 +46,4 @@ VALUES (1, "Project Manager", 100000, 001),
            (9, "Chin", "Young", 19, 17),
            (10, "Linda", "Greedman", 4, 1),
 
--- double check the manager_id part.
+-- double check the manager_id part.try using inner join.
