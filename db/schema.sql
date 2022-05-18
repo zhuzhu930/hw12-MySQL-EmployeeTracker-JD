@@ -21,6 +21,7 @@ CREATE TABLE role (
 
 );
 
+-- need to join employee.id and employee.manager_id. 
 CREATE TABLE employee (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   first_name VARCHAR(30) NOT NULL,
