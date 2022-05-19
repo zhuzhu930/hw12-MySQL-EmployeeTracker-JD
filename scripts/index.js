@@ -14,6 +14,7 @@ const employees = {
 
 //const employeeIdArray = [];
 //functions: 
+//function start
 function start() {
     console.log("Employee Tracker & Management");
     inquirer.prompt([
@@ -50,7 +51,26 @@ function start() {
 }
 
 //function viewDepartments
+function viewDepartments() {
+    db.query('SELECT id AS "Department ID", name AS "Department Name" FROM department;', function (err, results) {
+        if(err) {
+            throw(err);
+        } else {
+           console.log(results); 
+        }  
+});
+}
+
 //function viewRoles
+function viewRoles() {
+    db.query('SELECT title AS "Job Title", role.id AS "Role ID", salary AS "Salary", name AS "Department Name" FROM role, department WHERE department.id = department_id;', function (err, results) {
+        if(err) {
+            throw(err);
+        } else {
+           console.log(results); 
+        }  
+});
+}
 //function viewEmployees
 //function addDepartment
 //function addRole
