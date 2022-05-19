@@ -6,10 +6,11 @@ const Employee = require('../lib/Employee');
 const Role = require('../lib/Role');
 const Department = require('../lib/Department');
 
+//should I add employee names, roles and department names in here?
 const employees = {
-    employee: null, 
-    roles: [],
-    departments: [],
+    employee: [], 
+    role: [],
+    department: [],
 }
 
 //const employeeIdArray = [];
@@ -85,5 +86,65 @@ function viewEmployees() {
 
 
 //function addDepartment
+function addDepartment(){
+    inquirer.prompt([
+        {
+            type: "list", 
+            message: "What department would you like to add?",
+            name: "addDept",
+            choices: ["Public Relations", "Government affairs", "Global outreach", "Accounting", "Communications", "Language Services"],
+        }, 
+    ]).then((data) => {
+        const newDept = data.addDept;
+        // const newDept = new Department(id, data.addDept);
+        // employees.department.push(department);
+        //not so sure how to link this part with database:
+        db.query(`INSERT INTO department
+        VALUES (id, ${newDept});`, function (err, results) {
+            if(err) {
+                throw(err);
+            } else {
+               console.log(results); 
+               console.log("A new department has bee added.") 
+            }
+    });
+    });
+}
+
 //function addRole
+function addRole() {
+    inquirer.prompt([
+        {
+            type: "list", 
+            message: "What role would you like to add?",
+            name: "addRole",
+            choices: ["Marketing assistant", "Finance assistant", "Operations assistant", "HR assistant", "IT assistant"],
+        },
+        {
+            type: "list", 
+            message: "What salary would you like to add for this role?",
+            name: "addSalary",
+            choices: ["50000", "55000", "60000", "65000", "70000"],
+        }, 
+        {
+            type: "list", 
+            message: "What department does this role belong to?",
+            name: "belongTo",
+            //the choice should be dynamic
+            choices: ["Marketing", "Finance", "Operations", "Human Resource", "IT"],
+        }
+    ]).then((data) => {
+        // const newRole = data.addRole;
+        const role = new Role(id, data.addRole, data.addSalary, data.belongTo)
+        //how to add this new role into database: 
+        db.query(`INSERT INTO role VALUES (${role})`, function (err, results) {
+            if(err) {
+                throw(err);
+            } else {
+               console.log(results);
+               console.log("A new role has bee added.");
+            }  
+    });
+    })
+}
 //function addEmployee
