@@ -1,14 +1,14 @@
 ## Plan for the app
 
-1. Write schema to structure the tables.
-2. Seed tables with data.
+1. Write schema to structure the tables---done
+2. Seed tables with data---done
 3. Write inquirer:
 
 - List of all options: View all departments; View all roles; View all employees, Add a department, Add a role, Add an employee, Update an employee role.
 - View all department: SELECT id AS "Department ID", name AS "Department Name" FROM department;
-- View all roles: SELECT title AS "Job Title", id AS "Role ID", salary AS "Salary", name FROM role, department WHERE id = department_id;
-
-- View all employees: SELECT id AS "Employee ID", first_name AS "First Name", last_name AS "Last Name", title AS "Job Title", name as "Department name", manager_id as "Manager ID" FROM department, employee, role WHERE role_id = role.id;
+- View all roles: SELECT title AS "Job Title", role.id AS "Role ID", salary AS "Salary", name AS "Department Name" FROM role, department WHERE department.id = department_id;
+<!-- this query is not working -->
+- View all employees: SELECT id AS "Employee ID", first_name AS "First Name", last_name AS "Last Name", title AS "Job Title", name as "Department Name", manager_id as "Manager ID" FROM department, employee, role WHERE role_id = role.id;
 <!-- Here need to figure out how to generate the manger name -->
 
 - Add a department: INSERT INTO department(name)
