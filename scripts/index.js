@@ -63,7 +63,7 @@ function viewDepartments() {
 
 //function viewRoles
 function viewRoles() {
-    db.query('SELECT title AS "Job Title", role.id AS "Role ID", salary AS "Salary", name AS "Department Name" FROM role, department WHERE department.id = department_id;', function (err, results) {
+    db.query('SELECT title AS "Job Title", role.id AS "Role ID", salary AS "Salary", department.name AS "Department Name" FROM role, department WHERE department.id = department_id;', function (err, results) {
         if(err) {
             throw(err);
         } else {
@@ -72,6 +72,18 @@ function viewRoles() {
 });
 }
 //function viewEmployees
+function viewEmployees() {
+    //This query is not working properly
+    db.query(`SELECT employee.id AS "Employee ID", first_name AS "First Name", last_name AS "Last Name", title AS "Job Title", name as "Department Name", salary AS "Salary", manager_id as "Manager ID" FROM department, employee, role;`, function (err, results) {
+        if(err) {
+            throw(err);
+        } else {
+           console.log(results); 
+        }  
+});
+}
+
+
 //function addDepartment
 //function addRole
 //function addEmployee
