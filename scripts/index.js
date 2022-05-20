@@ -7,11 +7,11 @@ const Role = require('../lib/Role');
 const Department = require('../lib/Department');
 
 //should I add employee names, roles and department names in here?
-const employees = {
-    employee: [], 
-    role: [],
-    department: [],
-}
+// const employees = {
+//     employee: [], 
+//     role: [],
+//     department: [],
+// }
 
 //const employeeIdArray = [];
 //functions: 

@@ -1,5 +1,6 @@
 const express = require('express');
 const mysql = require('mysql2');
+const db = require('./scripts/connection')
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -7,15 +8,16 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-const db = mysql.createConnection(
-  {
-    host: 'localhost',
-    user: 'root',
-    password: 'rootroot',
-    database: 'employees_db'
-  },
-  console.log(`Connected to the employees_db database.`)
-);
+//This connection part is moved to ./scripts/connection.js
+// const db = mysql.createConnection(
+//   {
+//     host: 'localhost',
+//     user: 'root',
+//     password: 'rootroot',
+//     database: 'employees_db'
+//   },
+//   console.log(`Connected to the employees_db database.`)
+// );
 
 // adding new queries: 
 // db.query('SELECT COUNT(id) AS total_count FROM favorite_books GROUP BY in_stock', function (err, results) {
