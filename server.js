@@ -152,7 +152,7 @@ function addRole() {
           choices: ["Marketing", "Finance", "Operations", "Human Resource", "IT"],
       }
   ]).then((data) => {
-      // const newRole = data.addRole;
+      // ? id is not defined, need to figure out
       const role = new Role(id, data.addRole, data.addSalary, data.belongTo)
       //how to add this new role into database: 
       db.query(`INSERT INTO role VALUES (${role})`, function (err, results) {
@@ -190,6 +190,7 @@ function addEmployee() {
           name: "managerId"
       },
   ]).then((data) => {
+    //? id is not defined.
       const employee = new Employee(id, data.firstName, data.lastName, data.roleId, data.managerId);
 // ? Not so sure if this is correct to link db and the table. Do I need to destructure the ${employee}?
       db.query(`INSERT INTO employee VALUES (${employee})`, function (err, results) {
