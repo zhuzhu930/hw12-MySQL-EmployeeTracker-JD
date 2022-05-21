@@ -74,7 +74,7 @@ function viewRoles() {
 }
 //function viewEmployees
 function viewEmployees() {
-    //This query is not working properly
+    //? This query is not working properly
     db.query(`SELECT employee.id AS "Employee ID", first_name AS "First Name", last_name AS "Last Name", title AS "Job Title", name as "Department Name", salary AS "Salary", manager_id as "Manager ID" FROM department, employee, role;`, function (err, results) {
         if(err) {
             throw(err);
@@ -105,7 +105,7 @@ function addDepartment(){
                 throw(err);
             } else {
                console.log(results); 
-               console.log("A new department has bee added.") 
+               console.log("A new department has been added.") 
             }
     });
     });
@@ -142,9 +142,44 @@ function addRole() {
                 throw(err);
             } else {
                console.log(results);
-               console.log("A new role has bee added.");
+               console.log("A new role has been added.");
             }  
     });
     })
 }
 //function addEmployee
+function addEmployee() {
+    inquirer.prompt([
+        {
+            type: "input",
+            message: "Please enter the first name",
+            name: "firstName"
+        },
+        {
+            type: "input",
+            message: "Please enter the last name",
+            name: "lastName"
+        },
+        {
+            type: "input",
+            message: "Please enter the role Id",
+            name: "roleId"
+        },
+        {
+            type: "input",
+            message: "Please enter the manager Id",
+            name: "managerId"
+        },
+    ]).then((data) => {
+        const employee = new Employee(id, data.firstName, data.lastName, data.roleId, data.managerId);
+// ? Not so sure if this is correct to link db and the table.
+        db.query(`INSERT INTO employee VALUES (${employee})`, function (err, results) {
+            if(err) {
+                throw(err);
+            } else {
+               console.log(results);
+               console.log("A new employee has been added.");
+            }  
+    });
+    })
+}
