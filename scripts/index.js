@@ -1,7 +1,10 @@
 //Write inquier: 
 const inquirer = require("inquirer");
+//const express = require('express');
+
 // const fs = require('fs');
 
+// const db = require('./connection')
 const Employee = require('../lib/Employee');
 const Role = require('../lib/Role');
 const Department = require('../lib/Department');
@@ -95,12 +98,10 @@ function addDepartment(){
             choices: ["Public Relations", "Government affairs", "Global outreach", "Accounting", "Communications", "Language Services"],
         }, 
     ]).then((data) => {
-        const newDept = data.addDept;
-        // const newDept = new Department(id, data.addDept);
-        // employees.department.push(department);
+        const department = new Department(id, data.addDept);
         //not so sure how to link this part with database:
         db.query(`INSERT INTO department
-        VALUES (id, ${newDept});`, function (err, results) {
+        VALUES (${department});`, function (err, results) {
             if(err) {
                 throw(err);
             } else {
@@ -172,7 +173,7 @@ function addEmployee() {
         },
     ]).then((data) => {
         const employee = new Employee(id, data.firstName, data.lastName, data.roleId, data.managerId);
-// ? Not so sure if this is correct to link db and the table.
+// ? Not so sure if this is correct to link db and the table. Do I need to destructure the ${employee}?
         db.query(`INSERT INTO employee VALUES (${employee})`, function (err, results) {
             if(err) {
                 throw(err);
@@ -183,3 +184,5 @@ function addEmployee() {
     });
     })
 }
+
+start();
