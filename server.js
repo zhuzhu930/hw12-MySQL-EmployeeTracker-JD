@@ -2,6 +2,7 @@
 const express = require('express');
 const mysql = require('mysql2');
 const inquirer = require("inquirer");
+const cTable = require('console.table');
 //require('dotenv').config();
 
 const Employee = require('./lib/Employee');
@@ -18,9 +19,6 @@ app.use(express.json());
 
 //connect to the database, .env file is used.
 const db = mysql.createConnection(
-  // process.env.DB_NAME,
-  // process.env.DB_USER,
-  // process.env.DB_PASSWORD,
   {
     host: 'localhost',
     dialect: 'mysql',
@@ -74,7 +72,8 @@ function viewDepartments() {
       if(err) {
           throw(err);
       } else {
-         console.log(results); 
+        //  console.log(results); 
+        console.table('\n', results);
       }  
 });
   start();
@@ -86,7 +85,7 @@ function viewRoles() {
       if(err) {
           throw(err);
       } else {
-         console.log(results); 
+        console.table('\n', results); 
       }  
 });
   start();
@@ -94,11 +93,15 @@ function viewRoles() {
 //function viewEmployees
 function viewEmployees() {
   //? This query is not working properly
-  db.query(`SELECT employee.id AS "Employee ID", first_name AS "First Name", last_name AS "Last Name", title AS "Job Title", name as "Department Name", salary AS "Salary", manager_id as "Manager ID" FROM department, employee, role;`, function (err, results) {
+  db.query(`
+  SELECT employee.id AS "Employee ID", first_name AS "First Name", last_name AS "Last Name", role.title AS "Job Title", department.name as "Department Name", role.salary AS "Salary", manager_id as "Manager ID" 
+  FROM employee, role, department
+  WHERE employee.role_id = role.id AND role.department_id = department.id
+  ORDER BY 1,2;`, function (err, results) {
       if(err) {
           throw(err);
       } else {
-         console.log(results); 
+        console.table('\n', results); 
       }  
 });
   start();
@@ -191,6 +194,7 @@ function addEmployee() {
       },
   ]).then((data) => {
     //? id is not defined.
+    //maybe define varialbes and add them directly into the database.
       const employee = new Employee(id, data.firstName, data.lastName, data.roleId, data.managerId);
 // ? Not so sure if this is correct to link db and the table. Do I need to destructure the ${employee}?
       db.query(`INSERT INTO employee VALUES (${employee})`, function (err, results) {
