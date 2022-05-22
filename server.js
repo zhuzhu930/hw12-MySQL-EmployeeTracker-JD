@@ -76,7 +76,8 @@ function viewDepartments() {
           throw(err);
       } else {
         //  console.log(results); 
-        console.table('\n', results);
+        console.table('\n', results, '\n----------------');
+        start();
       }  
 });
   // start();
@@ -88,7 +89,8 @@ function viewRoles() {
       if(err) {
           throw(err);
       } else {
-        console.table('\n', results); 
+        console.table('\n', results, '\n----------------');
+        start();
       }  
 })
 }
@@ -103,7 +105,8 @@ function viewEmployees() {
       if(err) {
           throw(err);
       } else {
-        console.table('\n', results); 
+        console.table('\n', results, '\n----------------');
+        start();
       }  
 });
 }
@@ -127,14 +130,15 @@ function addDepartment(){
               throw(err);
           } else {
              console.log("A new department has been added.");
-             console.table('\n', results);
+             console.table('\n', results, '\n----------------');
           }
       });
       db.query(`SELECT id AS "Department Id", name AS "Department Name" FROM department;`, function (err, results) {
         if(err) {
           throw(err);
         } else {
-          console.table('\n', results);
+          console.table('\n', results, '\n----------------');
+          start();
         }
       })
   });
@@ -175,7 +179,7 @@ function addRole() {
               throw(err);
           } else {
              console.log("A new role has been added.");
-             console.table('\n', results);
+             console.table('\n', results, '\n----------------');
           }  
       });
       //This query is not working properly, I can't see the added value. 
@@ -183,7 +187,8 @@ function addRole() {
         if(err) {
           throw(err);
         } else {
-          console.table('\n', results);
+          console.table('\n', results, '\n----------------');
+          start();
         }
       })
   })
@@ -221,7 +226,7 @@ function addEmployee() {
               throw(err);
           } else {
              console.log("A new employee has been added.");
-             console.table('\n', results);
+             console.table('\n', results, '\n----------------');
           }  
   });
   })
@@ -231,8 +236,10 @@ app.use((req, res) => {
   res.status(404).end();
 });
 
+//console.log('\n----------------\n');
+
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log('\n', `Server running on port ${PORT}`);
 });
 
 start();
