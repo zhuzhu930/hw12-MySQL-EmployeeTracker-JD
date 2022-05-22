@@ -21,7 +21,7 @@ app.use(express.json());
 const db = mysql.createConnection(
   {
     host: 'localhost',
-    dialect: 'mysql',
+    //dialect: 'mysql',
     user: 'root',
     password: 'rootroot',
     database: 'employees_db',
@@ -29,10 +29,14 @@ const db = mysql.createConnection(
   },
   console.log(`Connected to the employees_db database.`)
 );
-
+//Formatting title of the app and adding a style: 
+//for now the style is not working
+const style = "color: red; background: #eee; font-size: 50 ";
 
 function start() {
-  console.log("Employee Tracker & Management");
+  // console.log("Employee Tracker & Management");
+  console.log("%c Employee Tracker & Management", style);
+  console.log('\n-----------------');
   inquirer.prompt([
       {
           type: "list", 
@@ -61,7 +65,7 @@ function start() {
           addEmployee();
           break;
         case data.nextStep = "I'm finished":
-          console.log("Thank you for using this application!");
+          console.log("Thank you for using this application! Please press ctrl + c to exit.");
           break;
         default: 
           console.log("Please choose an option!")
@@ -75,7 +79,7 @@ function viewDepartments() {
       if(err) {
           throw(err);
       } else {
-        //  console.log(results); 
+        console.log('\n-----------------');
         console.table('\n', results, '\n----------------');
         start();
       }  
@@ -89,6 +93,7 @@ function viewRoles() {
       if(err) {
           throw(err);
       } else {
+        console.log('\n-----------------');
         console.table('\n', results, '\n----------------');
         start();
       }  
@@ -105,6 +110,7 @@ function viewEmployees() {
       if(err) {
           throw(err);
       } else {
+        console.log('\n-----------------');
         console.table('\n', results, '\n----------------');
         start();
       }  
@@ -129,6 +135,7 @@ function addDepartment(){
           if(err) {
               throw(err);
           } else {
+            console.log('\n-----------------');
              console.log("A new department has been added.");
              console.table('\n', results, '\n----------------');
           }
@@ -137,6 +144,7 @@ function addDepartment(){
         if(err) {
           throw(err);
         } else {
+          console.log('\n-----------------');
           console.table('\n', results, '\n----------------');
           start();
         }
@@ -171,22 +179,38 @@ function addRole() {
       // const role = new Role(id, data.addRole, data.addSalary, data.belongTo)
       const title = data.addRole;
       const salary = data.addSalary;
-      const department = data.belongTo;
+      let department = data.belongTo;
+      let departmentId = "";
+      switch(department) {
+        case department = "Marketing": 
+          departmentId = 001;
+        case department = "Finance":
+          departmentId = 002;
+        case department = "Operations":
+          departmentId = 003;
+        case department = "Human Resource":
+          departmentId = 004;
+        case department = "IT":
+          departmentId = 005;
+      }
       //how to add this new role into database: 
       db.query(`INSERT INTO role(title, salary) 
       VALUES ("${title}", "${salary}");`, function (err, results) {
           if(err) {
               throw(err);
           } else {
+            console.log('\n-----------------');
              console.log("A new role has been added.");
              console.table('\n', results, '\n----------------');
           }  
       });
-      //This query is not working properly, I can't see the added value. 
-      db.query(`SELECT role.id AS "Id", role.title AS "Title", role.salary AS "Salary", department.name AS "Department Name" FROM role, department WHERE role.department_id = department.id;`, function (err, results) {
+      //? This query is not working properly, 
+      //the department name is constantly rewritten.
+      db.query(`SELECT role.id AS "Id", role.title AS "Title", role.salary AS "Salary", department.name AS "Department Name" FROM role, department WHERE department.id = "${departmentId}";`, function (err, results) {
         if(err) {
           throw(err);
         } else {
+          console.log('\n-----------------');
           console.table('\n', results, '\n----------------');
           start();
         }
@@ -230,6 +254,7 @@ function addEmployee() {
           if(err) {
               throw(err);
           } else {
+            console.log('\n-----------------');
              console.log("A new employee has been added.");
              console.table('\n', results, '\n----------------');
           }  
@@ -238,6 +263,7 @@ function addEmployee() {
         if(err) {
           throw(err);
         } else {
+          console.log('\n-----------------');
           console.table('\n', results, '\n----------------');
           start();
         }
@@ -248,8 +274,6 @@ function addEmployee() {
 app.use((req, res) => {
   res.status(404).end();
 });
-
-//console.log('\n----------------\n');
 
 app.listen(PORT, () => {
   console.log('\n', `Server running on port ${PORT}`);
