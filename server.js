@@ -41,29 +41,32 @@ function start() {
           choices: ["View all departments", "View all roles", "View all employees", "Add a department", "Add a role", "Add an employee", "I'm finished"],
       }, 
   ]).then((data) => {
-      console.log(data);
-      if(data.nextStep === "View all departments") {
-          viewDepartments()
+      switch (data.nextStep) {
+        case data.nextStep = "View all departments":
+          viewDepartments();
+          break;
+        case data.nextStep = "View all roles":
+          viewRoles();
+          break;
+        case data.nextStep = "View all employees":
+          viewEmployees();
+          break;
+        case data.nextStep = "Add a department":
+          addDepartment();
+          break;
+        case data.nextStep = "Add a role":
+          addRole();
+          break;
+        case data.nextStep = "Add an employee":
+          addEmployee();
+          break;
+        case data.nextStep = "I'm finished":
+          console.log("Thank you for using this application!");
+          break;
+        default: 
+          console.log("Please choose an option!")
       }
-      else if(data.nextStep === "View all roles") {
-          viewRoles()
-      }
-      else if(data.nextStep === "View all employees") {
-          viewEmployees()
-      }
-      else if(data.nextStep === "Add a department") {
-          addDepartment()
-      }
-      else if(data.nextStep === "Add a role") {
-          addRole()
-      }
-      else if(data.nextStep === "Add an employee") {
-          addEmployee()
-      }
-      else if(data.nextStep === "I'm finished") {
-          console.log("Thank you for using this application!")
-      }
-  })
+  })      
 }
 
 //function viewDepartments
@@ -76,7 +79,7 @@ function viewDepartments() {
         console.table('\n', results);
       }  
 });
-  start();
+  // start();
 }
 
 //function viewRoles
@@ -87,12 +90,11 @@ function viewRoles() {
       } else {
         console.table('\n', results); 
       }  
-});
-  start();
+})
 }
 //function viewEmployees
 function viewEmployees() {
-  //? This query is not working properly
+  //selecting different columns from 3 tables.
   db.query(`
   SELECT employee.id AS "Employee ID", first_name AS "First Name", last_name AS "Last Name", role.title AS "Job Title", department.name as "Department Name", role.salary AS "Salary", manager_id as "Manager ID" 
   FROM employee, role, department
@@ -104,7 +106,6 @@ function viewEmployees() {
         console.table('\n', results); 
       }  
 });
-  start();
 }
 
 //function addDepartment
@@ -117,19 +118,19 @@ function addDepartment(){
           choices: ["Public Relations", "Government affairs", "Global outreach", "Accounting", "Communications", "Language Services"],
       }, 
   ]).then((data) => {
-      const department = new Department(id, data.addDept);
+      // const department = new Department(id, data.addDept);
       //not so sure how to link this part with database:
-      db.query(`INSERT INTO department
-      VALUES (${department});`, function (err, results) {
+      const departmentName = data.addDept;
+      db.query(`INSERT INTO department(name)
+      VALUES ("${departmentName}");`, function (err, results) {
           if(err) {
               throw(err);
           } else {
-             console.log(results); 
-             console.log("A new department has been added.") 
+             console.log("A new department has been added.");
+             console.table('\n', results);
           }
   });
   });
-  start();
 }
 
 //function addRole
@@ -162,12 +163,11 @@ function addRole() {
           if(err) {
               throw(err);
           } else {
-             console.log(results);
              console.log("A new role has been added.");
+             console.table('\n', results);
           }  
   });
   })
-  start();
 }
 //function addEmployee
 function addEmployee() {
@@ -201,12 +201,11 @@ function addEmployee() {
           if(err) {
               throw(err);
           } else {
-             console.log(results);
              console.log("A new employee has been added.");
+             console.table('\n', results);
           }  
   });
   })
-  start();
 }
 
 app.use((req, res) => {
