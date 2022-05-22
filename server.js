@@ -129,7 +129,14 @@ function addDepartment(){
              console.log("A new department has been added.");
              console.table('\n', results);
           }
-  });
+      });
+      db.query(`SELECT id AS "Department Id", name AS "Department Name" FROM department;`, function (err, results) {
+        if(err) {
+          throw(err);
+        } else {
+          console.table('\n', results);
+        }
+      })
   });
 }
 
@@ -157,16 +164,28 @@ function addRole() {
       }
   ]).then((data) => {
       // ? id is not defined, need to figure out
-      const role = new Role(id, data.addRole, data.addSalary, data.belongTo)
+      // const role = new Role(id, data.addRole, data.addSalary, data.belongTo)
+      const title = data.addRole;
+      const salary = data.addSalary;
+      const department = data.belongTo;
       //how to add this new role into database: 
-      db.query(`INSERT INTO role VALUES (${role})`, function (err, results) {
+      db.query(`INSERT INTO role(title, salary) 
+      VALUES ("${title}", "${salary}");`, function (err, results) {
           if(err) {
               throw(err);
           } else {
              console.log("A new role has been added.");
              console.table('\n', results);
           }  
-  });
+      });
+      //This query is not working properly, I can't see the added value. 
+      db.query(`SELECT role.id AS "Id", role.title AS "Title", role.salary AS "Salary", department.name AS "Department Name" FROM role, department WHERE role.department_id = department.id;`, function (err, results) {
+        if(err) {
+          throw(err);
+        } else {
+          console.table('\n', results);
+        }
+      })
   })
 }
 //function addEmployee
