@@ -219,16 +219,29 @@ function addEmployee() {
   ]).then((data) => {
     //? id is not defined.
     //maybe define varialbes and add them directly into the database.
-      const employee = new Employee(id, data.firstName, data.lastName, data.roleId, data.managerId);
+      // const employee = new Employee(id, data.firstName, data.lastName, data.roleId, data.managerId);
+      const firstName = data.firstName;
+      const lastName = data.lastName;
+      const roleId = data.roleId;
+      const managerId = data.managerId;
 // ? Not so sure if this is correct to link db and the table. Do I need to destructure the ${employee}?
-      db.query(`INSERT INTO employee VALUES (${employee})`, function (err, results) {
+      db.query(`INSERT INTO employee(first_name, last_name, role_id, manager_id) 
+      VALUES ("${firstName}", "${lastName}", "${roleId}", "${managerId}")`, function (err, results) {
           if(err) {
               throw(err);
           } else {
              console.log("A new employee has been added.");
              console.table('\n', results, '\n----------------');
           }  
-  });
+      });
+      db.query(`SELECT id AS "Employee Id", first_name AS "First Name", last_name AS "Last Name", role_id AS "Role Id", manager_id as "Manager Id" FROM employee;`, function (err, results) {
+        if(err) {
+          throw(err);
+        } else {
+          console.table('\n', results, '\n----------------');
+          start();
+        }
+      })
   })
 }
 
