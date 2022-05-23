@@ -1,9 +1,9 @@
 INSERT INTO department (id, name)
-VALUES (001, "Marketing"),
-       (002, "Finance"),
-       (003, "Operations"),
-       (004, "Human Resource"),
-       (005, "IT");
+VALUES (1, "Marketing"),
+       (2, "Finance"),
+       (3, "Operations"),
+       (4, "Human Resource"),
+       (5, "IT");
 
 INSERT INTO role (id, title, salary, department_id)
 VALUES (1, "Project Manager", 100000, 001),
@@ -38,7 +38,7 @@ VALUES (1, "Project Manager", 100000, 001),
     VALUES (1, "William", "Smith", 10, NULL),
            (2, "Rezza", "Fredd", 2, NULL),
            (3, "Mohan", "Kumar", 20, NULL),
-           (4, "Cindy", "Mac", 18, 4), // change the manager_id referencing another manager id.
+           (4, "Cindy", "Mac", 18, 4), 
            (5, "Vince", "Jose", 26, 5),
            (6, "Rajiv", "Kumar", 22, NULL),
            (7, "John", "Thomas", 7, NULL),

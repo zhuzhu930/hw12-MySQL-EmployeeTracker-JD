@@ -170,26 +170,33 @@ function addRole() {
           choices: ["Marketing", "Finance", "Operations", "Human Resource", "IT"],
       }
   ]).then((data) => {
+      console.log(data);
       const title = data.addRole;
       const salary = data.addSalary;
-      //?trying to link dept id and dept name, not successful
+      //convert depatment information into department Id so I can use it later in the SQL query. 
       let department = data.belongTo;
-      let departmentId = "";
+      let departmentId;
       switch(department) {
         case department = "Marketing": 
-          departmentId = 001;
+          departmentId = 1;
+          break;
         case department = "Finance":
-          departmentId = 002;
+          departmentId = 2;
+          break;
         case department = "Operations":
-          departmentId = 003;
+          departmentId = 3;
+          break;
         case department = "Human Resource":
-          departmentId = 004;
+          departmentId = 4;
+          break;
         case department = "IT":
-          departmentId = 005;
+          departmentId = 5;
+          break;
       }
+      console.log(departmentId);
       //Add this new role into database: 
-      db.query(`INSERT INTO role(title, salary) 
-      VALUES ("${title}", "${salary}");`, function (err, results) {
+      db.query(`INSERT INTO role(title, salary, department_id) 
+      VALUES ("${title}", "${salary}", "${departmentId}");`, function (err, results) {
           if(err) {
               throw(err);
           } else {
@@ -198,9 +205,8 @@ function addRole() {
              console.table('\n', results, '\n----------------');
           }  
       });
-      //? trying to display added information: This query is not working properly, 
-      //the department name is constantly rewritten.
-      db.query(`SELECT role.id AS "Id", role.title AS "Title", role.salary AS "Salary", department.name AS "Department Name" FROM role, department WHERE department.id = "${departmentId}";`, function (err, results) {
+      //showing the added role. 
+      db.query(`SELECT role.id AS "Id", role.title AS "Title", role.salary AS "Salary", department.name AS "Department Name" FROM role, department WHERE role.department_id = department.id;`, function (err, results) {
         if(err) {
           throw(err);
         } else {
