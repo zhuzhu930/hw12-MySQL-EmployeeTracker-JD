@@ -27,27 +27,33 @@ Please tell us the 3 simple steps for installing your app.
 
 ## Usage
 
-- Screenshots of the App
+Screenshots of the App:
 
-Terminal side:
-Source the SQL database:
-![Source SQL database](assets/SOURCE_database.png)
-Opening page of the app:
-![Opening Page](assets/openingPageAndMenu.png)
-View all departments:
-![View all departments](assets/viewAllDepartments.png)
-View all roles:
-![View all roles](assets/viewAllRoles.png)
-View all employees:
-![View all employeess](assets/viewAllEmployees.png)
-Add a department:
-![Add a department](assets/addedDepartment.png)
-Add a role:
-![Add a role](assets/addedRole1.png)
-![Add a role 2](assets/addedRole2.png)
-Add an employee:
-![Add an employee](assets/addedEmployee1.png)
-![Add an employee 2](assets/addedEmployee2.png)
+- Source the SQL database:
+  ![Source SQL database](assets/SOURCE_database.png)
+
+- Opening page of the app:
+  ![Opening Page](assets/openingPageAndMenu.png)
+
+- View all departments:
+  ![View all departments](assets/viewAllDepartments.png)
+
+- View all roles:
+  ![View all roles](assets/viewAllRoles.png)
+
+- View all employees:
+  ![View all employeess](assets/viewAllEmployees.png)
+
+- Add a department:
+  ![Add a department](assets/addedDepartment.png)
+
+- Add a role:
+  ![Add a role](assets/addedRole1.png)
+  ![Add a role 2](assets/addedRole2.png)
+
+- Add an employee:
+  ![Add an employee](assets/addedEmployee1.png)
+  ![Add an employee 2](assets/addedEmployee2.png)
 
 ## License
 
