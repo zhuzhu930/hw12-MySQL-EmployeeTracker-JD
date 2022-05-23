@@ -4,11 +4,6 @@ const mysql = require('mysql2');
 const inquirer = require("inquirer");
 const cTable = require('console.table');
 
-//this part is not used, maybe better to use models in sequelize.
-const Employee = require('./lib/Employee');
-const Role = require('./lib/Role');
-const Department = require('./lib/Department');
-
 //Start the server port and open an express instance.
 const PORT = process.env.PORT || 3001;
 const app = express();
