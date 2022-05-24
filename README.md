@@ -6,7 +6,7 @@ Designed by: Jessie Doherty
 
 ## Description
 
-This is a commandline app that can help you track the departments, roles, and employees in a company, as well as add a department, role or employee when managing the employee database.
+This is a command line app that can help you track the departments, roles, and employees in a company, as well as add a department, role or employee when managing the employee database.
 
 - What was your motivation?
 - Answer: A convenient way for HR department tracking the status of an organization's employees.
